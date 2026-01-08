@@ -37,13 +37,13 @@ const HeroSection = () => {
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             Acesse jogos exclusivos de roleta, blackjack, poker e muito mais. 
-            Deposite apenas <span className="text-primary font-bold">R$ 5,00</span> e comece a jogar agora mesmo!
+            Deposite a partir de <span className="text-primary font-bold">R$ 20,00</span> e comece a jogar agora mesmo!
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <Button variant="gold" size="xl" className="w-full sm:w-auto">
-              Depositar R$ 5,00
+            <Button variant="gold" size="xl" className="w-full sm:w-auto" onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}>
+              Depositar R$ 20,00
               <ArrowRight className="w-5 h-5" />
             </Button>
             <Button variant="glass" size="xl" className="w-full sm:w-auto">
