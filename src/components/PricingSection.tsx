@@ -3,11 +3,11 @@ import { Check, Star, Zap } from "lucide-react";
 
 const plans = [
   {
-    name: "Iniciante",
-    price: "5",
-    credits: "50",
+    name: "Básico",
+    price: "20",
+    credits: "100",
     features: [
-      "50 créditos para jogar",
+      "100 créditos para jogar",
       "Acesso a jogos básicos",
       "Roleta Clássica",
       "Slots Populares",
@@ -17,30 +17,45 @@ const plans = [
     buttonVariant: "outline" as const,
   },
   {
-    name: "Popular",
-    price: "10",
-    credits: "120",
+    name: "Plus",
+    price: "30",
+    credits: "180",
     features: [
-      "120 créditos para jogar",
+      "180 créditos para jogar",
       "Acesso a todos os jogos",
-      "Roleta Premium + VIP",
+      "Roleta Premium",
       "Blackjack e Poker",
       "Bônus de 20%",
       "Suporte prioritário",
+    ],
+    popular: false,
+    buttonVariant: "glass" as const,
+  },
+  {
+    name: "Premium",
+    price: "40",
+    credits: "280",
+    features: [
+      "280 créditos para jogar",
+      "Acesso VIP completo",
+      "Todos os jogos liberados",
+      "Bônus de 40%",
+      "Cashback semanal",
+      "Suporte prioritário 24h",
     ],
     popular: true,
     buttonVariant: "gold" as const,
   },
   {
-    name: "VIP",
-    price: "25",
-    credits: "350",
+    name: "VIP Elite",
+    price: "50",
+    credits: "400",
     features: [
-      "350 créditos para jogar",
-      "Acesso VIP exclusivo",
-      "Todos os jogos + Novidades",
-      "Bônus de 40%",
-      "Cashback semanal",
+      "400 créditos para jogar",
+      "Acesso VIP Elite exclusivo",
+      "Todos os jogos + Lançamentos",
+      "Bônus de 60%",
+      "Cashback diário",
       "Gerente de conta dedicado",
     ],
     popular: false,
@@ -67,7 +82,7 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <div 
               key={plan.name}
