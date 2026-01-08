@@ -46,7 +46,7 @@ const HeroSection = () => {
               Depositar R$ 20,00
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button variant="glass" size="xl" className="w-full sm:w-auto">
+            <Button variant="glass" size="xl" className="w-full sm:w-auto" onClick={() => document.getElementById('jogos')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver Todos os Jogos
             </Button>
           </div>

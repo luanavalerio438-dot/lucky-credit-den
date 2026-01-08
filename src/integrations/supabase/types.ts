@@ -14,7 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_sessions: {
+        Row: {
+          bet_amount: number
+          created_at: string
+          details: Json | null
+          game: string
+          id: string
+          result: string
+          user_id: string
+          win_amount: number | null
+        }
+        Insert: {
+          bet_amount: number
+          created_at?: string
+          details?: Json | null
+          game: string
+          id?: string
+          result: string
+          user_id: string
+          win_amount?: number | null
+        }
+        Update: {
+          bet_amount?: number
+          created_at?: string
+          details?: Json | null
+          game?: string
+          id?: string
+          result?: string
+          user_id?: string
+          win_amount?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          credits: number
+          display_name: string | null
+          email: string | null
+          id: string
+          total_deposited: number
+          total_lost: number
+          total_won: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credits?: number
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          total_deposited?: number
+          total_lost?: number
+          total_won?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credits?: number
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          total_deposited?: number
+          total_lost?: number
+          total_won?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          game: string | null
+          id: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          game?: string | null
+          id?: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          game?: string | null
+          id?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

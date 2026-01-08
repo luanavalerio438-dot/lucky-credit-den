@@ -14,6 +14,8 @@ const games = [
     rating: 4.9,
     players: "2.5k",
     isHot: true,
+    route: "/roulette",
+    isPlayable: true,
   },
   {
     title: "Blackjack VIP",
@@ -22,6 +24,7 @@ const games = [
     rating: 4.8,
     players: "1.8k",
     isNew: true,
+    isPlayable: false,
   },
   {
     title: "Mega Slots 777",
@@ -30,6 +33,7 @@ const games = [
     rating: 4.7,
     players: "3.2k",
     isHot: true,
+    isPlayable: false,
   },
   {
     title: "Texas Hold'em",
@@ -37,6 +41,7 @@ const games = [
     category: "Poker",
     rating: 4.9,
     players: "1.5k",
+    isPlayable: false,
   },
   {
     title: "Dados da Sorte",
@@ -45,6 +50,7 @@ const games = [
     rating: 4.6,
     players: "980",
     isNew: true,
+    isPlayable: false,
   },
   {
     title: "Baccarat Gold",
@@ -52,6 +58,7 @@ const games = [
     category: "Cartas",
     rating: 4.8,
     players: "1.2k",
+    isPlayable: false,
   },
 ];
 

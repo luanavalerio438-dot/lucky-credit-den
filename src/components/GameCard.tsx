@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Play, Star, Users } from "lucide-react";
+import { Play, Star, Users, Lock } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface GameCardProps {
   title: string;
@@ -10,9 +12,20 @@ interface GameCardProps {
   players: string;
   isHot?: boolean;
   isNew?: boolean;
+  route?: string;
+  isPlayable?: boolean;
 }
 
-const GameCard = ({ title, image, category, rating, players, isHot, isNew }: GameCardProps) => {
+const GameCard = ({ title, image, category, rating, players, isHot, isNew, route, isPlayable }: GameCardProps) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handlePlay = () => {
+    if (route && isPlayable) {
+      navigate(route);
+    }
+  };
+
   return (
     <div className="group relative rounded-2xl overflow-hidden glass-card border border-border/50 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.02]">
       {/* Image Container */}
@@ -40,9 +53,25 @@ const GameCard = ({ title, image, category, rating, players, isHot, isNew }: Gam
           )}
         </div>
 
+        {/* Playable indicator */}
+        {!isPlayable && (
+          <div className="absolute top-3 right-3">
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-muted/80 text-muted-foreground text-xs">
+              <Lock className="w-3 h-3" />
+              Em breve
+            </div>
+          </div>
+        )}
+
         {/* Play Button Overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button variant="gold" size="lg" className="rounded-full w-16 h-16 p-0">
+          <Button 
+            variant={isPlayable ? "gold" : "glass"} 
+            size="lg" 
+            className="rounded-full w-16 h-16 p-0"
+            onClick={handlePlay}
+            disabled={!isPlayable}
+          >
             <Play className="w-6 h-6 ml-1" />
           </Button>
         </div>
