@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useAddDeposit } from "@/hooks/useProfile";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Check, Zap } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Loader2, Check, Zap, ExternalLink } from "lucide-react";
 
 interface DepositModalProps {
   isOpen: boolean;
@@ -20,7 +20,6 @@ const depositPlans = [
 const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
   const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
-  const addDeposit = useAddDeposit();
   const { toast } = useToast();
 
   const handleDeposit = async () => {
@@ -30,20 +29,20 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
     setLoading(true);
 
     try {
-      await addDeposit.mutateAsync({
-        amount: plan.amount,
-        credits: plan.credits,
+      const { data, error } = await supabase.functions.invoke("create-deposit-checkout", {
+        body: { amount: plan.amount },
       });
-      
-      toast({
-        title: "Depósito realizado! 🎉",
-        description: `${plan.credits} créditos adicionados à sua conta.`,
-      });
-      onClose();
-      setSelectedPlan(null);
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, "_blank");
+        onClose();
+        setSelectedPlan(null);
+      }
     } catch (error: any) {
       toast({
-        title: "Erro no depósito",
+        title: "Erro ao iniciar pagamento",
         description: error.message || "Tente novamente.",
         variant: "destructive",
       });
@@ -101,9 +100,9 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
 
         <div className="mt-6 p-4 rounded-xl bg-muted/30 border border-border/50">
           <p className="text-sm text-muted-foreground text-center">
-            💳 Pagamento simulado para demonstração. 
+            💳 Pagamento seguro via Stripe.
             <br />
-            Os créditos são adicionados instantaneamente.
+            Você será redirecionado para concluir o pagamento.
           </p>
         </div>
 
@@ -120,7 +119,10 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
               Processando...
             </>
           ) : (
-            `Depositar R$ ${selectedPlan !== null ? depositPlans[selectedPlan].amount : "0"},00`
+            <>
+              <ExternalLink className="w-4 h-4" />
+              {`Pagar R$ ${selectedPlan !== null ? depositPlans[selectedPlan].amount : "0"},00`}
+            </>
           )}
         </Button>
       </DialogContent>
