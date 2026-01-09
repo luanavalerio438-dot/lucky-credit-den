@@ -14,7 +14,7 @@ const depositPlans = [
   { amount: 20, credits: 100, bonus: 0 },
   { amount: 30, credits: 180, bonus: 20 },
   { amount: 40, credits: 280, bonus: 40 },
-  { amount: 50, credits: 400, bonus: 60 },
+  { amount: 190, credits: 400, bonus: 60 },
 ];
 
 const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
