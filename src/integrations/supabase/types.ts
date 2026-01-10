@@ -56,6 +56,7 @@ export type Database = {
           id: string
           total_deposited: number
           total_lost: number
+          total_withdrawn: number | null
           total_won: number
           updated_at: string
           user_id: string
@@ -68,6 +69,7 @@ export type Database = {
           id?: string
           total_deposited?: number
           total_lost?: number
+          total_withdrawn?: number | null
           total_won?: number
           updated_at?: string
           user_id: string
@@ -80,6 +82,7 @@ export type Database = {
           id?: string
           total_deposited?: number
           total_lost?: number
+          total_withdrawn?: number | null
           total_won?: number
           updated_at?: string
           user_id?: string
@@ -112,6 +115,45 @@ export type Database = {
           game?: string | null
           id?: string
           type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      withdrawals: {
+        Row: {
+          amount: number
+          created_at: string
+          credits_amount: number
+          id: string
+          notes: string | null
+          pix_key: string
+          pix_key_type: string
+          processed_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          credits_amount: number
+          id?: string
+          notes?: string | null
+          pix_key: string
+          pix_key_type: string
+          processed_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          credits_amount?: number
+          id?: string
+          notes?: string | null
+          pix_key?: string
+          pix_key_type?: string
+          processed_at?: string | null
+          status?: string
           user_id?: string
         }
         Relationships: []

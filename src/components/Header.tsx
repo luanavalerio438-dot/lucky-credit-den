@@ -4,14 +4,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/hooks/useProfile";
 import AuthModal from "./AuthModal";
 import DepositModal from "./DepositModal";
-import { Coins, Menu, X, LogOut, Wallet } from "lucide-react";
+import WithdrawModal from "./WithdrawModal";
+import { Coins, Menu, X, LogOut, Wallet, ArrowDownToLine } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<"login" | "signup">("login");
   const [showDepositModal, setShowDepositModal] = useState(false);
-  
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const { user, signOut } = useAuth();
   const { data: profile } = useProfile();
 
@@ -65,6 +66,10 @@ const Header = () => {
                     <Wallet className="w-4 h-4" />
                     Depositar
                   </Button>
+                  <Button variant="outline" size="lg" onClick={() => setShowWithdrawModal(true)}>
+                    <ArrowDownToLine className="w-4 h-4" />
+                    Sacar
+                  </Button>
                   <Button variant="ghost" onClick={signOut}>
                     <LogOut className="w-4 h-4" />
                   </Button>
@@ -113,6 +118,10 @@ const Header = () => {
                     <Wallet className="w-4 h-4" />
                     Depositar
                   </Button>
+                  <Button variant="outline" size="lg" className="w-full" onClick={() => setShowWithdrawModal(true)}>
+                    <ArrowDownToLine className="w-4 h-4" />
+                    Sacar
+                  </Button>
                   <Button variant="ghost" className="w-full" onClick={signOut}>
                     <LogOut className="w-4 h-4" />
                     Sair
@@ -139,6 +148,10 @@ const Header = () => {
       <DepositModal 
         isOpen={showDepositModal} 
         onClose={() => setShowDepositModal(false)} 
+      />
+      <WithdrawModal 
+        isOpen={showWithdrawModal} 
+        onClose={() => setShowWithdrawModal(false)} 
       />
     </>
   );
