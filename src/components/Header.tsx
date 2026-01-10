@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/hooks/useProfile";
 import AuthModal from "./AuthModal";
 import DepositModal from "./DepositModal";
 import WithdrawModal from "./WithdrawModal";
-import { Coins, Menu, X, LogOut, Wallet, ArrowDownToLine } from "lucide-react";
+import { Coins, Menu, X, LogOut, Wallet, ArrowDownToLine, History } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +14,7 @@ const Header = () => {
   const [authModalTab, setAuthModalTab] = useState<"login" | "signup">("login");
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const { data: profile } = useProfile();
 
@@ -58,10 +60,13 @@ const Header = () => {
             <div className="hidden md:flex items-center gap-4">
               {user ? (
                 <>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card">
+                  <button 
+                    onClick={() => navigate("/historico")}
+                    className="flex items-center gap-2 px-4 py-2 rounded-full glass-card hover:border-primary/50 transition-colors cursor-pointer"
+                  >
                     <Coins className="w-4 h-4 text-primary" />
                     <span className="font-bold text-foreground">{profile?.credits || 0}</span>
-                  </div>
+                  </button>
                   <Button variant="emerald" size="lg" onClick={() => setShowDepositModal(true)}>
                     <Wallet className="w-4 h-4" />
                     Depositar
@@ -70,7 +75,10 @@ const Header = () => {
                     <ArrowDownToLine className="w-4 h-4" />
                     Sacar
                   </Button>
-                  <Button variant="ghost" onClick={signOut}>
+                  <Button variant="ghost" size="icon" onClick={() => navigate("/historico")} title="Histórico">
+                    <History className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={signOut} title="Sair">
                     <LogOut className="w-4 h-4" />
                   </Button>
                 </>
@@ -110,10 +118,13 @@ const Header = () => {
               
               {user ? (
                 <div className="flex flex-col gap-3">
-                  <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl glass-card">
+                  <button 
+                    onClick={() => navigate("/historico")}
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl glass-card hover:border-primary/50 transition-colors"
+                  >
                     <Coins className="w-5 h-5 text-primary" />
                     <span className="font-bold text-foreground text-lg">{profile?.credits || 0} créditos</span>
-                  </div>
+                  </button>
                   <Button variant="emerald" size="lg" className="w-full" onClick={() => setShowDepositModal(true)}>
                     <Wallet className="w-4 h-4" />
                     Depositar
@@ -121,6 +132,10 @@ const Header = () => {
                   <Button variant="outline" size="lg" className="w-full" onClick={() => setShowWithdrawModal(true)}>
                     <ArrowDownToLine className="w-4 h-4" />
                     Sacar
+                  </Button>
+                  <Button variant="ghost" className="w-full" onClick={() => navigate("/historico")}>
+                    <History className="w-4 h-4" />
+                    Histórico
                   </Button>
                   <Button variant="ghost" className="w-full" onClick={signOut}>
                     <LogOut className="w-4 h-4" />
