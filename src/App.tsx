@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Roulette from "./pages/Roulette";
 import DepositSuccess from "./pages/DepositSuccess";
 import TransactionHistory from "./pages/TransactionHistory";
+import AdminWithdrawals from "./pages/AdminWithdrawals";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/roulette" element={<Roulette />} />
             <Route path="/deposit-success" element={<DepositSuccess />} />
             <Route path="/historico" element={<TransactionHistory />} />
+            <Route path="/admin/saques" element={<AdminWithdrawals />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

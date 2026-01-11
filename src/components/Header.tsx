@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/hooks/useProfile";
+import { useAdmin } from "@/hooks/useAdmin";
 import AuthModal from "./AuthModal";
 import DepositModal from "./DepositModal";
 import WithdrawModal from "./WithdrawModal";
-import { Coins, Menu, X, LogOut, Wallet, ArrowDownToLine, History } from "lucide-react";
+import { Coins, Menu, X, LogOut, Wallet, ArrowDownToLine, History, Shield } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +18,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const { data: profile } = useProfile();
+  const { isAdmin } = useAdmin();
 
   const openLogin = () => {
     setAuthModalTab("login");
@@ -78,6 +80,11 @@ const Header = () => {
                   <Button variant="ghost" size="icon" onClick={() => navigate("/historico")} title="Histórico">
                     <History className="w-4 h-4" />
                   </Button>
+                  {isAdmin && (
+                    <Button variant="ghost" size="icon" onClick={() => navigate("/admin/saques")} title="Admin">
+                      <Shield className="w-4 h-4" />
+                    </Button>
+                  )}
                   <Button variant="ghost" size="icon" onClick={signOut} title="Sair">
                     <LogOut className="w-4 h-4" />
                   </Button>
@@ -137,6 +144,12 @@ const Header = () => {
                     <History className="w-4 h-4" />
                     Histórico
                   </Button>
+                  {isAdmin && (
+                    <Button variant="ghost" className="w-full" onClick={() => navigate("/admin/saques")}>
+                      <Shield className="w-4 h-4" />
+                      Admin Saques
+                    </Button>
+                  )}
                   <Button variant="ghost" className="w-full" onClick={signOut}>
                     <LogOut className="w-4 h-4" />
                     Sair
