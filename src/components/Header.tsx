@@ -81,7 +81,7 @@ const Header = () => {
                     <History className="w-4 h-4" />
                   </Button>
                   {isAdmin && (
-                    <Button variant="ghost" size="icon" onClick={() => navigate("/admin/saques")} title="Admin">
+                    <Button variant="ghost" size="icon" onClick={() => navigate("/admin")} title="Admin">
                       <Shield className="w-4 h-4" />
                     </Button>
                   )}
@@ -145,9 +145,9 @@ const Header = () => {
                     Histórico
                   </Button>
                   {isAdmin && (
-                    <Button variant="ghost" className="w-full" onClick={() => navigate("/admin/saques")}>
+                    <Button variant="ghost" className="w-full" onClick={() => navigate("/admin")}>
                       <Shield className="w-4 h-4" />
-                      Admin Saques
+                      Painel Admin
                     </Button>
                   )}
                   <Button variant="ghost" className="w-full" onClick={signOut}>
